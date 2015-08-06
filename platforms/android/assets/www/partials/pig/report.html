@@ -1,0 +1,54 @@
+<div class="container" ng-app = "myApp">
+  <header data-role="header">
+    <h1 align="center"><b>Image Loading Test</b></h1>
+  </header>
+  <div align="center">
+                <button class="btn btn-default btn-lg" ng-click="takePhoto();">Capture Photo</button> <br>
+                <br>
+                <br>
+                <button class="btn btn-default btn-lg" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Get Photo From Library</button>
+                <br>
+  	<br>
+  	<br>
+    <button class="btn btn-default btn-lg" ng-click="upload()"> Upload Image </button>
+    <br>
+    <br>
+    <br>
+    <button class="btn btn-default btn-lg" > Receive Image </button>
+    <br>
+    <br>
+    <br>
+    <div id = "container-image">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="timeline-centered">
+        <article class="timeline-entry">
+          <div class="timeline-entry-inner">
+            <time class="timeline-time" datetime="2014-01-10T03:45"><span>03:45</span> <span>01-08-2015</span></time>
+            <div class="timeline-icon bg-success">
+              <i class="entypo-feather"></i>
+            </div>
+            <div class="timeline-label">
+              <h2>Nhiệt độ: 20 độ</h2><br>
+              <h2>Độ ẩm:    90%</h2><br>
+              <img src="http://images.tienphong.vn/Uploaded/huyquang/2015_03_09/1_NVXO.jpg" class="img-responsive img-rounded full-width">
+            </div>
+        </article>
+        <article class="timeline-entry">
+          <div class="timeline-entry-inner">
+            <time class="timeline-time" datetime="2014-01-10T03:45"><span>19:45</span> <span>01-08-2015</span></time>
+            <div class="timeline-icon bg-success">
+              <i class="entypo-camera"></i>
+            </div>
+            <div class="timeline-label">
+              <h2>Nhiệt độ: 100</h2><br>
+              <img src="http://langvietonline.vn/Uploads/Images/0/010/00104792ac81809ee06b757f71b2f108.jpg" class="img-responsive img-rounded full-width">
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+	            

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css"
+          href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custome-bootstrap.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.min.css"/>
+   <link rel="stylesheet"
+          href="bower_components/angular-rangeslider/angular.rangeSlider.css">
+    <link rel="stylesheet"
+          href="bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet"
+          href="bower_components/timePicker/ez-timepicker.min.css">
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css">
+    <link rel="stylesheet"
+          href="bower_components/ngDialog/css/ngDialog-theme-default.css">
+    <link rel="stylesheet"
+          href="bower_components/ngDialog/css/ngDialog-theme-plain.css">
+    <link rel="stylesheet" type="text/css" href="css/radio/build.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootsnipp-timeline.css">
+
+    <script src="bower_components/angular/jquery-1.10.2.min.js"></script>
+    <script type="application/javascript"
+            src="bower_components/hightcharts/highcharts.js"></script>
+    <script type="application/javascript"
+            src="bower_components/hightcharts/highcharts-more.js"></script>
+    <script type="application/javascript"
+            src="bower_components/hightcharts/solid-gauge.js"></script>
+    <script src="bower_components/socket.io-1.2.0.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="application/javascript" src="js/client.js"></script>-->
+    <script type="application/javascript" src="js/index.js"></script>
+    <script type="application/javascript" charset="utf-8" src="PushNotification.js"></script>
+
+    <script type="text/javascript">
+        function myFunction(){
+            window.localStorage.clear();
+            var storage = window.localStorage;
+            storage.setItem("statusPhone","false");
+        };
+    </script>
+
+    <!--<script type="application/javascript"-->
+    <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrCdkoTiUTyMp3eYbC_3i_IcqoAnIgKf4">-->
+    <!--</script>-->
+    <!--<script src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
+</head>
+<body ng-class="first_class " ng-app="myApp" id="deviceready" ng-controller="FlowManagerController" onunload="myFunction()" class="{{hideScroll}}">
+<span style="display: none" class="event listening"></span>
+<span style="display: none" class="event received"></span>
+
+<script type="text/ng-template" id="templateId">
+    <h3 class="text-center"><i class="fa fa-spinner fa-spin"></i> Đang tải</h3>
+</script>
+
+<script type="text/ng-template" id="templateDangNhap">
+    <h3 class="text-center"><i class="fa fa-circle-o-notch fa-spin" ></i> Đang kiểm tra</h3>
+</script>
+<script type="text/ng-template" id="templateLoiDangNhap">
+    <h3 class="text-center">Bạn đã nhập sai tên đăng nhập/mật khẩu.</h3>
+</script>
+<div ng-show="loginSuccess" class="ng-hide" style="background: white">
+    <div class="col-md-12">
+        <div class="row navbar-fixed-top mms-top" >
+            <a ng-click="" ng-if="!leftIcon.status" class="pull-left " href="">
+                <i class="fa fa-align-justify fa-2x icon-hover" style="opacity: 0.8; color: white; margin-left: 5px; margin-top: 7px"></i>
+            </a>
+            <a  ng-if="leftIcon.status" class="pull-left" href="{{leftIcon.hrefIcon}}">
+                <i ng-class="leftIcon.classIcon" class=" fa-2x icon-hover" style="opacity: 0.8; color: white; margin-left: 22px; margin-top: 5px"></i>
+            </a>
+            <div class="">
+                <h4 class=""
+                    style="color: #ffffff; margin-left: 20px; font-weight: bold;  padding-left: 20px !important;">{{configure.titleName}}</h4>
+            </div>
+            <a ng-if="!leftIcon.status" href="{{configure.hrefIcon}}"> <i
+                    ng-class="configure.classIcon" class="pull-right  fa-2x icon-hover"
+                    style="position: fixed; z-index: 100000; top: 0; right: 0; opacity: 0.8; color: white; margin-right: 8px; margin-top: 5px;"></i>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="tabbable-panel my-header-menu" >
+            <div class="tabbable-line">
+                <ul class="mms-menu nav nav-tabs fix-top"
+                    style="border-bottom: 4px solid rgb(250, 142, 0)">
+                    <li class="minosa-menu-item " ng-class="activeClass[0].class">
+                        <a href="#/pighome/" ng-click="clickTab(0)">
+                            <!--<i class="fa fa-home fa-3x" style="color: white"></i>-->
+                            <img src="img/home.png" style="width: 45px">
+                            <span class="alert-notification"></span>
+                        </a></li>
+                    <li class="minosa-menu-item" ng-class="activeClass[1].class">
+                        <a href="#/pigsetting" ng-click="clickTab(1)">
+                        <img src="img/pig/icon_setting.png" style="width: 50px">
+
+                    </a></li>
+                    <li class="minosa-menu-item" ng-class="activeClass[3].class"><a href="#/pigreport" ng-click="clickTab(3)">
+                        <img
+                            src="img/pig/Icon_report.png" style="width: 50px"></a></li>
+
+                    <li style="border-right: 0px solid white;" class="minosa-menu-item"
+                        ng-class="activeClass[2].class"><a
+                            href="#/pigabout" ng-click="clickTab(2)"> <img
+                            src="img/pig/icon_about.png" style="width: 50px"></a></li>
+                </ul>
+                <div class="tab-content">
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="swift_menu" class="my-overlay" >
+
+</div>
+
+<div ng-show="swift_menu" class="my-left-menu " ng-class="animateSwift " >
+    <a ng-click="" ng-if="!leftIcon.status" class="pull-right" href="">
+        <i class="fa fa-align-justify fa-2x icon-hover" style="opacity: 0.8; color: white; margin-left: 5px; margin-top: 7px;  margin-right: 8px;"></i>
+    </a>
+    <h4 style="margin-left: 10px;color:white;margin-top:10px;margin-bottom:20px">
+        <img src="img/logo1.png" style="width:15%;border:1px groove white" alt="..." class="" style="">
+        {{customer_name}}</h4>
+    <ul class="list-group">
+             <li ng-click="confirmLogout()" style="margin-top:40px;cursor: pointer" ng-click style="cursor: pointer" class="list-group-item my-left-menu-item"><span class="glyphicon glyphicon-user"></span>ĐĂNG XUẤT</li>
+    </ul>
+
+</div>
+
+<div id="home" class="tab-content ">
+    <div ng-view="" class="my-content" style="" style="height: 100%;"></div>
+</div>
+
+<br>
+
+<script type="text/ng-template" id="templateConfirmLogout">
+    <!--<h4 class="my-back-btn" > Bạn muốn đăng xuất?</h4>-->
+    <div class="my-back-btn-dialog"> Bạn muốn đăng xuất?</div>
+    <div class="form-group text-center" style="margin-left:5px; margin-right:5px">
+    </div>
+    <div style ="text-align: center">
+        <div class="my-top-dot-border">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+        <button ng-click="logOut()" class="btn btn-warning my-two-button" >Thực hiện</button>
+        <button ng-click="cancleLogOut()" class="btn btn-warning my-two-button" >Hủy bỏ</button>
+        <div class="clearfix"></div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="templateConfirmLogout2">
+
+    <div class="my-back-btn-dialog"> Bạn muốn thoát ứng dụng?</div>
+    <div class="form-group text-center" style="margin-left:5px; margin-right:5px">
+    </div>
+
+    <div style ="text-align: center">
+        <div class="my-top-dot-border">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+        <button ng-click="logOut2()" class="btn btn-warning my-two-button" >Thực hiện</button>
+        <button ng-click="cancleLogOut()" class="btn btn-warning my-two-button" >Hủy bỏ</button>
+        <div class="clearfix"></div>
+    </div>
+
+</script>
+
+<script type="application/javascript" src="js/fastclick.js"></script>
+<script type="application/javascript" src="bower_components/angular/angular.js"></script>
+<script type="application/javascript" src="bower_components/angular/angular-cookies.js"></script>
+<script type="application/javascript" src="bower_components/angular/angular-route.js"></script>
+<script type="application/javascript" src="bower_components/angular/angular-resource.js"></script>
+<script type="application/javascript" src="bower_components/angular/angular-touch.min.js"></script>
+<!--<script type="application/javascript" src="bower_components/angular/angular-bootstrap-switch.min.js"></script>-->
+<script type="application/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script type="application/javascript" src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+<script type="application/javascript" src="bower_components/ng-infinite-scroll.min.js"></script>
+<!--&lt;!&ndash;<script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap.min.js"></script>&ndash;&gt;-->
+<script type="application/javascript" src="bower_components/angular/ui-bootstrap-tpls.js"></script>
+<!--<script type="application/javascript" src="bower_components/highstock.src.js"></script>-->
+<script src="bower_components/angular-ui-switch/angular-ui-switch.js"></script>
+
+
+<script type="application/javascript" src="js/directives/timepickerpop.js"></script>
+<script type="application/javascript" src="js/directives/highcharts-ng.js"></script>
+
+<script type="application/javascript" src="js/directives/modalDirective.js"></script>
+
+<script type="application/javascript" src="js/app.js"></script>
+
+<script type="application/javascript" src="js/services/managementUnit.js"></script>
+<script type="application/javascript" src="js/services/TimelineMore.js"></script>
+<!--Controller Library-->
+
+
+
+
+<script type="application/javascript" src="js/controllers/FlowManagerController.js"></script>
+<script type="application/javascript" src="js/controllers/LoginController.js"></script>
+<script type="application/javascript" src="js/controllers/MonitoryController.js"></script>
+
+<script type="application/javascript" src="js/controllers/TreeDbController.js"></script>
+<script type="application/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script type="application/javascript" src="bower_components/ngDialog/js/ngDialog.min.js"></script>
+
+
+
+<!--Smart Ventilation-->
+<script type="application/javascript" src="js/controllers/pig/PigSettingController.js"></script>
+<script type="application/javascript" src="js/controllers/pig/PigHomeController.js"></script>
+<script type="application/javascript" src="js/controllers/pig/PigReportController.js"></script>
+<script type="application/javascript" src="js/controllers/pig/PigAboutController.js"></script>
+<script type="application/javascript" src="js/controllers/ManagementSettingController.js"></script>
+
+
+
+<script type="application/javascript" src="js/map/lodash.min.js" ></script>
+<script type="application/javascript" src="js/map/angular-google-maps.min.js"></script>
+
+<script type="application/javascript" src="bower_components/moment-with-locales.js"></script>
+
+</body>
+</html>
