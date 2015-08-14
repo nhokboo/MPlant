@@ -9,7 +9,7 @@
             libraries: 'weather,geometry,visualization'
         });
     });
-    myApp.controller('ManagementSettingController',function(managementUnit,$location,geolocation,uiGmapGoogleMapApi,ngDialog,$scope){
+    myApp.controller('ManagementSettingController',function(managementUnit,$location,geolocation,ngDialog,$scope){
 
 
 

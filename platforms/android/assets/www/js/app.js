@@ -5,7 +5,7 @@ var globalURLV1 = 'http://dev.mimosatek.com:5002/api/';
 //
 
 
-var module = angular.module('myApp', ['uiSwitch','ngTouch','infinite-scroll','uiGmapgoogle-maps','ngDialog','ngCookies','timepickerPop','ngRoute','highcharts-ng','ui-rangeSlider','ngSanitize']);
+var module = angular.module('myApp', ['panzoom','uiSwitch','ngTouch','infinite-scroll','ngDialog','ngCookies','timepickerPop','ngRoute','highcharts-ng','ui-rangeSlider','ngSanitize']);
 
 
 module.config(['$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {

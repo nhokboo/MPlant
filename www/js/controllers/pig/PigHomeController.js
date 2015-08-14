@@ -104,10 +104,11 @@
             });
         }
 
+        //spanzoom
+        $scope.config = {}; // use defaults
+        $scope.model = {};
          $scope.zoomImage=function(item){
 
-            FullScreenImage.showImageURL(item.image1600x1200);
-            /*
             $scope.Imagesrc = item.image1600x1200;
             var dialog =  ngDialog.open
             ({
@@ -116,12 +117,13 @@
 
 
                 // }],
+                className: 'ngdialog-theme-plain',
                 showClose:true,
                 closeByDocument: false,
                 replace: true,
                 scope: $scope
             });
-            */
+
         };
     });
 
